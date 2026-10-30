@@ -3,6 +3,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url = uri("https://artifact.bytedance.com/repository/pangle") }
         jcenter() // Warning: this repository is going to shut down soon
         maven {
             url "https://artifactory.appodeal.com/appodeal"
