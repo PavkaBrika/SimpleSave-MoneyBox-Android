@@ -177,8 +177,10 @@ class StartActivity : AppCompatActivity() {
         val migration: MigrationUseCase by inject()
 
         lifecycleScope.launch(Dispatchers.IO) {
-            if (!checkMainActivity.execute())
+            if (!checkMainActivity.execute()) {
                 migration.execute()
+                checkMainActivity.markMainActivityOpened()
+            }
             launch(Dispatchers.Main) {
                 id = getLastShowGoalUseCase.execute()
                 vm.getGoal(id = id)

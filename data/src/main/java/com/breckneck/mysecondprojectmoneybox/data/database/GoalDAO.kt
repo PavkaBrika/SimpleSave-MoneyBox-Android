@@ -3,6 +3,7 @@ package com.breckneck.mysecondprojectmoneybox.data.database
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.breckneck.mysecondprojectmoneybox.data.entity.Goal
@@ -10,7 +11,7 @@ import com.breckneck.mysecondprojectmoneybox.data.entity.Goal
 @Dao
 interface GoalDAO {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertGoal(goal: Goal)
 
     @Delete

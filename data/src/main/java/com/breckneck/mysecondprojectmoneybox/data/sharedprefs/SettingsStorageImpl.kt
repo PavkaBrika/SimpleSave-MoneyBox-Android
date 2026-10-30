@@ -16,12 +16,11 @@ class SettingsStorageImpl(context: Context): SettingsStorage {
     private val sp = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
 
     override fun mainActivityWasOpened(): Boolean {
-        val mainActivityWasOpened = sp.getBoolean(APP_PREFERENCES_APP_WAS_OPENED, false)
-        return if (!mainActivityWasOpened) {
-            sp.edit().putBoolean(APP_PREFERENCES_APP_WAS_OPENED, true).apply()
-            mainActivityWasOpened
-        } else
-            mainActivityWasOpened
+        return sp.getBoolean(APP_PREFERENCES_APP_WAS_OPENED, false)
+    }
+
+    override fun markMainActivityOpened() {
+        sp.edit().putBoolean(APP_PREFERENCES_APP_WAS_OPENED, true).apply()
     }
 
     override fun getVibroSetting(): Boolean {

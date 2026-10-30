@@ -9,6 +9,10 @@ class SettingsRepositoryImpl(private val settingsStorage: SettingsStorage): Sett
         return settingsStorage.mainActivityWasOpened()
     }
 
+    override fun markMainActivityOpened() {
+        settingsStorage.markMainActivityOpened()
+    }
+
     override fun getVibroSetting(): Boolean {
         return settingsStorage.getVibroSetting()
     }

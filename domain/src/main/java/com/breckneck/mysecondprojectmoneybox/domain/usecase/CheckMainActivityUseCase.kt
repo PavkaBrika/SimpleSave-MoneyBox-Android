@@ -7,4 +7,8 @@ class CheckMainActivityUseCase(private val settingsRepository: SettingsRepositor
     fun execute(): Boolean {
         return settingsRepository.mainActivityWasOpened()
     }
+
+    fun markMainActivityOpened() {
+        settingsRepository.markMainActivityOpened()
+    }
 }

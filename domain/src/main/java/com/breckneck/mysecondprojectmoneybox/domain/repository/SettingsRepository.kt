@@ -4,6 +4,8 @@ interface SettingsRepository {
 
     fun mainActivityWasOpened(): Boolean
 
+    fun markMainActivityOpened()
+
     fun getVibroSetting(): Boolean
 
     fun setVibro(isEnabled: Boolean)

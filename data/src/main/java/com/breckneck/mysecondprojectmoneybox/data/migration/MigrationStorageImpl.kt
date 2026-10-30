@@ -1,6 +1,7 @@
 package com.breckneck.mysecondprojectmoneybox.data.migration
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
 import com.breckneck.mysecondprojectmoneybox.data.database.GoalDatabase
 import com.breckneck.mysecondprojectmoneybox.data.entity.Goal
@@ -30,30 +31,50 @@ class MigrationStorageImpl(val context: Context): MigrationStorage {
     val appSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
 
     override fun migration() {
-        if (appSettings.contains(APP_PREFERENCES_GOAL_ID)) {
-            val id = appSettings.getInt(APP_PREFERENCES_GOAL_ID, 0)
-            if (id == 1) {
-                if ((appSettings.contains(APP_PREFERENCES_COST)) && (appSettings.contains(APP_PREFERENCES_MONEY)) && (appSettings.contains(APP_PREFERENCES_ITEM)))
-                    db.appDao().insertGoal(Goal(id = 1, cost = appSettings.getFloat(APP_PREFERENCES_COST, 0F).toDouble(), money = appSettings.getFloat(APP_PREFERENCES_MONEY, 0F).toDouble(), item = appSettings.getString(APP_PREFERENCES_ITEM, "").toString()))
-                if ((listGoals.contains(SECOND_COST)) && (listGoals.contains(SECOND_MONEY)) && (listGoals.contains(SECOND_ITEM)))
-                    db.appDao().insertGoal(Goal(id = 2, cost = listGoals.getFloat(SECOND_COST, 0F).toDouble(), money = listGoals.getFloat(SECOND_MONEY, 0F).toDouble(), item = listGoals.getString(SECOND_ITEM, "").toString()))
-                if ((listGoals.contains(THIRD_COST)) && (listGoals.contains(THIRD_MONEY)) && (listGoals.contains(THIRD_ITEM)))
-                    db.appDao().insertGoal(Goal(id = 3, cost = listGoals.getFloat(THIRD_COST, 0F).toDouble(), money = listGoals.getFloat(THIRD_MONEY, 0F).toDouble(), item = listGoals.getString(THIRD_ITEM, "").toString()))
-            } else if (id == 2) {
-                if ((listGoals.contains(FIRST_COST)) && (listGoals.contains(FIRST_MONEY)) && (listGoals.contains(FIRST_ITEM)))
-                    db.appDao().insertGoal(Goal(id = 1, cost = listGoals.getFloat(FIRST_COST, 0F).toDouble(), money = listGoals.getFloat(FIRST_MONEY, 0F).toDouble(), item = listGoals.getString(FIRST_ITEM, "").toString()))
-                if ((appSettings.contains(APP_PREFERENCES_COST)) && (appSettings.contains(APP_PREFERENCES_MONEY)) && (appSettings.contains(APP_PREFERENCES_ITEM)))
-                    db.appDao().insertGoal(Goal(id = 2, cost = appSettings.getFloat(APP_PREFERENCES_COST, 0F).toDouble(), money = appSettings.getFloat(APP_PREFERENCES_MONEY, 0F).toDouble(), item = appSettings.getString(APP_PREFERENCES_ITEM, "").toString()))
-                if ((listGoals.contains(THIRD_COST)) && (listGoals.contains(THIRD_MONEY)) && (listGoals.contains(THIRD_ITEM)))
-                    db.appDao().insertGoal(Goal(id = 3, cost = listGoals.getFloat(THIRD_COST, 0F).toDouble(), money = listGoals.getFloat(THIRD_MONEY, 0F).toDouble(), item = listGoals.getString(THIRD_ITEM, "").toString()))
-            } else if (id == 3) {
-                if ((listGoals.contains(FIRST_COST)) && (listGoals.contains(FIRST_MONEY)) && (listGoals.contains(FIRST_ITEM)))
-                    db.appDao().insertGoal(Goal(id = 1, cost = listGoals.getFloat(FIRST_COST, 0F).toDouble(), money = listGoals.getFloat(FIRST_MONEY, 0F).toDouble(), item = listGoals.getString(FIRST_ITEM, "").toString()))
-                if ((listGoals.contains(SECOND_COST)) && (listGoals.contains(SECOND_MONEY)) && (listGoals.contains(SECOND_ITEM)))
-                    db.appDao().insertGoal(Goal(id = 2, cost = listGoals.getFloat(SECOND_COST, 0F).toDouble(), money = listGoals.getFloat(SECOND_MONEY, 0F).toDouble(), item = listGoals.getString(SECOND_ITEM, "").toString()))
-                if ((appSettings.contains(APP_PREFERENCES_COST)) && (appSettings.contains(APP_PREFERENCES_MONEY)) && (appSettings.contains(APP_PREFERENCES_ITEM)))
-                    db.appDao().insertGoal(Goal(id = 3, cost = appSettings.getFloat(APP_PREFERENCES_COST, 0F).toDouble(), money = appSettings.getFloat(APP_PREFERENCES_MONEY, 0F).toDouble(), item = appSettings.getString(APP_PREFERENCES_ITEM, "").toString()))
-            }
+        if (!appSettings.contains(APP_PREFERENCES_GOAL_ID)) return
+
+        val currentGoalId = appSettings.getInt(APP_PREFERENCES_GOAL_ID, 0)
+        val goals = when (currentGoalId) {
+            1 -> listOfNotNull(
+                readGoal(appSettings, 1, APP_PREFERENCES_ITEM, APP_PREFERENCES_COST, APP_PREFERENCES_MONEY),
+                readGoal(listGoals, 2, SECOND_ITEM, SECOND_COST, SECOND_MONEY),
+                readGoal(listGoals, 3, THIRD_ITEM, THIRD_COST, THIRD_MONEY)
+            )
+            2 -> listOfNotNull(
+                readGoal(listGoals, 1, FIRST_ITEM, FIRST_COST, FIRST_MONEY),
+                readGoal(appSettings, 2, APP_PREFERENCES_ITEM, APP_PREFERENCES_COST, APP_PREFERENCES_MONEY),
+                readGoal(listGoals, 3, THIRD_ITEM, THIRD_COST, THIRD_MONEY)
+            )
+            3 -> listOfNotNull(
+                readGoal(listGoals, 1, FIRST_ITEM, FIRST_COST, FIRST_MONEY),
+                readGoal(listGoals, 2, SECOND_ITEM, SECOND_COST, SECOND_MONEY),
+                readGoal(appSettings, 3, APP_PREFERENCES_ITEM, APP_PREFERENCES_COST, APP_PREFERENCES_MONEY)
+            )
+            else -> emptyList()
         }
+
+        db.runInTransaction(Runnable {
+            val dao = db.appDao()
+            goals.forEach { goal -> dao.insertGoal(goal) }
+        })
+    }
+
+    private fun readGoal(
+        preferences: SharedPreferences,
+        id: Int,
+        itemKey: String,
+        costKey: String,
+        moneyKey: String
+    ): Goal? {
+        if (!preferences.contains(itemKey) || !preferences.contains(costKey) || !preferences.contains(moneyKey)) {
+            return null
+        }
+
+        return Goal(
+            id = id,
+            cost = preferences.getFloat(costKey, 0F).toDouble(),
+            money = preferences.getFloat(moneyKey, 0F).toDouble(),
+            item = preferences.getString(itemKey, "").orEmpty()
+        )
     }
 }

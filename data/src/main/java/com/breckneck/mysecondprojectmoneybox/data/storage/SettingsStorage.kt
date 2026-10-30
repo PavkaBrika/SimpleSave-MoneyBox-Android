@@ -2,7 +2,9 @@ package com.breckneck.mysecondprojectmoneybox.data.storage
 
 interface SettingsStorage {
 
-    fun mainActivityWasOpened() : Boolean
+    fun mainActivityWasOpened(): Boolean
+
+    fun markMainActivityOpened()
 
     fun getVibroSetting(): Boolean
 
