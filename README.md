@@ -12,6 +12,10 @@
 
 MoneyBox is my very first personal project that I built entirely on my own. It marked the beginning of my serious work with Android development. I created the app independently and published it on Google Play. It will always be a special milestone in my Android journey. 🚀
 
+## ⚠️ Maintenance status
+
+MoneyBox is no longer actively maintained or supported. The app remains available on Google Play, but new updates and support are not planned.
+
 ## 📲 Get the app
 
 [Download SimpleSave from Google Play](https://play.google.com/store/apps/details?id=com.breackneck.mysecondprojectmoneybox).
