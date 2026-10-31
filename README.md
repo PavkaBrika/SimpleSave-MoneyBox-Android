@@ -6,8 +6,6 @@
 
 <p align="center"><strong>SimpleSave — small steps toward your savings goals.</strong></p>
 
-<p align="center"><a href="https://play.google.com/store/apps/details?id=com.breackneck.mysecondprojectmoneybox"><strong>▶ Get it on Google Play</strong></a></p>
-
 ## 💛 A personal milestone
 
 MoneyBox is my very first personal project that I built entirely on my own. It marked the beginning of my serious work with Android development. I created the app independently and published it on Google Play. It will always be a special milestone in my Android journey. 🚀
@@ -15,10 +13,6 @@ MoneyBox is my very first personal project that I built entirely on my own. It m
 ## ⚠️ Maintenance status
 
 MoneyBox is no longer actively maintained or supported. The app remains available on Google Play, but new updates and support are not planned.
-
-## 📲 Get the app
-
-[Download SimpleSave from Google Play](https://play.google.com/store/apps/details?id=com.breackneck.mysecondprojectmoneybox).
 
 ## ✨ What the app does
 
@@ -73,3 +67,11 @@ You can also open the cloned directory in Android Studio, let Gradle sync, then 
 ## 🌍 Languages
 
 The app includes English, French, Russian, Belarusian, and Ukrainian resource translations.
+
+---
+
+<p align="center">
+  <a href="https://play.google.com/store/apps/details?id=com.breackneck.mysecondprojectmoneybox">
+    <img src="assets/google-play-badge.png" alt="Get it on Google Play" height="80" />
+  </a>
+</p>
