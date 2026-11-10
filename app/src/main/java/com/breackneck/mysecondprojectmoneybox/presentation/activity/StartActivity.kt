@@ -12,7 +12,10 @@ import android.util.TypedValue
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.*
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
@@ -71,9 +74,17 @@ class StartActivity : AppCompatActivity() {
     private val addButtonClickQuantityUseCase: AddButtonClickQuantityUseCase by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(insets.left, insets.top, insets.right, insets.bottom)
+            windowInsets
+        }
+
         /**
          * YANDEX MOBILE ADVERTISEMENT
          */
@@ -83,7 +94,7 @@ class StartActivity : AppCompatActivity() {
             if (binding.root.width == 0)
                 resources.displayMetrics.widthPixels
             else
-                findViewById<RelativeLayout>(R.id.rootLayout).width
+                binding.root.width
         val adWidth = (adWidthPixels / resources.displayMetrics.density).roundToInt()
         binding.bannerAdView.apply {
             setAdUnitId("R-M-1611210-2")

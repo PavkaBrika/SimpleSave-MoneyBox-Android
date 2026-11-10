@@ -12,6 +12,8 @@
 - [x] Обновить `compileSdk` до 36 в `data/build.gradle`.
 - [x] Обновить `targetSdk` до 36 в `data/build.gradle`.
 - [x] Обновить версию приложения (`versionCode` до 11, `versionName` до "4.3") в `app/build.gradle`.
-- [x] Синхронизировать проект с Gradle.
+- [x] Добавить поддержку Edge-to-Edge и обработку WindowInsets для соответствия требованиям Android 15/16 (API 35/36).
+- [x] Настроить `android:windowSoftInputMode="adjustResize"` в `AndroidManifest.xml`.
+- [x] Синхронизировать и проверить сборку проекта.
 - [ ] (Действие за вами) Собрать новую версию приложения (например, App Bundle).
 - [ ] (Действие за вами) Опубликовать новую рабочую версию приложения в Google Play (можно начать с внутреннего/закрытого тестирования).
