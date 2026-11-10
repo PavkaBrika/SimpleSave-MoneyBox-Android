@@ -14,6 +14,7 @@
 /.idea/kotlinc.xml
 /.idea/misc.xml
 /.idea/deploymentTarget*.xml
+/.idea/deviceManager*.xml
 /.idea/assetWizardSettings.xml
 /.idea/navEditor.xml
 /.idea/render.experimental.xml
