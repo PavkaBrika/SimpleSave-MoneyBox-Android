@@ -9,7 +9,7 @@
     <string name="cost">Это стоит</string>
     <string name="left">осталось</string>
     <string name="congratulations">Поздравляем! Вы достигли цели!</string>
-    <string name="mainActivityHint">Нажмите на персонажа чтобы увидеть больше</string>
+    <string name="mainActivityHint">Нажмите на персонажа, чтобы увидеть больше</string>
     <string name="alertDialogTitle">Сброс</string>
     <string name="alertDialogMessage">Сбросить вашу копилку?</string>
     <string name="alertDialogPositiveButton">Да</string>
@@ -27,7 +27,7 @@
     <string name="checkBoxTextEnableSoundChangeCharacter">Включить звук</string>
     <string name="characterNameGriff">Грифф</string>
     <string name="characterNameMrKrabs">Мистер Краббс</string>
-    <string name="characterNameScroogeMcDuck">Скурдж Макдак</string>
+    <string name="characterNameScroogeMcDuck">Скрудж Макдак</string>
     <string name="cancel">Отмена</string>
     <string name="activityTitleGoalsList">Список целей</string>
     <string name="ok">Ок</string>

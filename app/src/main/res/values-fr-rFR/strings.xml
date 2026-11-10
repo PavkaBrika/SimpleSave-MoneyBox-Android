@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SimpleSave</string>
-    <string name="saving">J\'économise de l\'argent pour:</string>
+    <string name="saving">J\'économise pour</string>
     <string name="itemHint">Saisissez votre objectif</string>
-    <string name="amountHint">Entrer le montant</string>
+    <string name="amountHint">Entrez le montant</string>
     <string name="targetHint">Entrez le coût</string>
-    <string name="toastAdd">Vous devez entrer le montant!</string>
-    <string name="cost">Ça coute:</string>
-    <string name="left">Restants</string>
-    <string name="congratulations">Toutes nos félicitations! Vous avez atteint votre objectif!</string>
-    <string name="mainActivityHint">Cliquez sur le personnage pour voir plus d\'informations</string>
-    <string name="alertDialogTitle">Réinitialiser </string>
-    <string name="alertDialogMessage">Réinitialisez votre tirelire?</string>
+    <string name="toastAdd">Vous devez entrer le montant !</string>
+    <string name="cost">Ça coûte</string>
+    <string name="left">restant</string>
+    <string name="congratulations">Félicitations ! Vous avez atteint votre objectif !</string>
+    <string name="mainActivityHint">Cliquez sur le personnage pour en savoir plus</string>
+    <string name="alertDialogTitle">Réinitialiser</string>
+    <string name="alertDialogMessage">Réinitialiser votre tirelire ?</string>
     <string name="alertDialogPositiveButton">Oui</string>
     <string name="alertDialogNegativeButton">Non</string>
-    <string name="alertDialogMessageNewGoal">Terminez ou réinitialisez l\'objectif précédent en premier</string>
-    <string name="activityTitleNewGoal">Créer un objectif</string>
-    <string name="activityTitleAddMoney">Ajouter/Soustraire le montant</string>
+    <string name="alertDialogMessageNewGoal">Terminez ou réinitialisez d\'abord l\'objectif précédent</string>
+    <string name="activityTitleNewGoal">Créer un nouvel objectif</string>
+    <string name="activityTitleAddMoney">Ajouter/Soustraire</string>
     <string name="textHintToAddNewGoalTextView">Cliquez ici pour créer un objectif</string>
-    <string name="toastNoInfoNewGoalActivity">Vous devez saisir l\'objectif et son prix!</string>
-    <string name="toastNoTargetNewGoalActivity">Vous devez saisir l\'objectif!</string>
-    <string name="toastNoCostNewGoalActivity">Vous devez entrer le coût!</string>
-    <string name="toastOnCharacterClick">Créez d\'abord un objectif!</string>
+    <string name="toastNoInfoNewGoalActivity">Vous devez saisir l\'objectif et son prix !</string>
+    <string name="toastNoTargetNewGoalActivity">Vous devez saisir l\'objectif !</string>
+    <string name="toastNoCostNewGoalActivity">Vous devez entrer le coût !</string>
+    <string name="toastOnCharacterClick">Créez d\'abord un objectif !</string>
     <string name="checkBoxTextEnableVibrationChangeCharacter">Activer les vibrations</string>
     <string name="checkBoxTextEnableSoundChangeCharacter">Activer le son</string>
     <string name="characterNameGriff">Griff</string>
@@ -29,10 +29,10 @@
     <string name="characterNameScroogeMcDuck">Scrooge McDuck</string>
     <string name="cancel">Annuler</string>
     <string name="activityTitleGoalsList">Liste des objectifs</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="add">Ajouter</string>
     <string name="remove">Soustraire</string>
-    <string name="titleSettings">Réglages</string>
-    <string name="activityHintGoals">Buts</string>
+    <string name="titleSettings">Paramètres</string>
+    <string name="activityHintGoals">Objectifs</string>
     <string name="characterNameBooba">Booba</string>
 </resources>
