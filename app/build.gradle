@@ -74,5 +74,5 @@ dependencies {
     implementation 'com.appodeal.ads.sdk.networks:yandex:3.2.0.0'
 
     //Yandex Mobile Ads
-    implementation 'com.yandex.android:mobileads:6.3.0'
+    implementation 'com.yandex.android:mobileads:7.10.0'
 }
