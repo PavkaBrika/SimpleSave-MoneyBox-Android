@@ -9,7 +9,7 @@ android {
     compileSdk 36
 
     defaultConfig {
-        minSdk 21
+        minSdk 23
         targetSdk 36
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -33,13 +33,10 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.9.0'
-
     //Clean Architecture
     implementation project(path: ':domain')
 
     //Room
-    implementation "androidx.room:room-runtime:2.4.3"
-    annotationProcessor "androidx.room:room-compiler:2.4.3"
-    kapt "androidx.room:room-compiler:2.4.3"
+    implementation "androidx.room:room-runtime:2.8.5"
+    kapt "androidx.room:room-compiler:2.8.5"
 }

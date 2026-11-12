@@ -5,8 +5,7 @@ import android.util.Log
 import com.breackneck.mysecondprojectmoneybox.di.appModule
 import com.breackneck.mysecondprojectmoneybox.di.dataModule
 import com.breackneck.mysecondprojectmoneybox.di.domainModule
-import com.yandex.mobile.ads.common.InitializationListener
-import com.yandex.mobile.ads.common.MobileAds
+import com.yandex.mobile.ads.common.YandexAds
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -17,11 +16,10 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
 
-        MobileAds.initialize(this, object: InitializationListener {
-            override fun onInitializationCompleted() {
-                Log.e("TAG", "Yandex initialized")
-            }
-        })
+        YandexAds.setUserConsent(false)
+        YandexAds.initialize(this) {
+            Log.e("TAG", "Yandex initialized")
+        }
 
         startKoin {
             androidLogger(level = Level.DEBUG)

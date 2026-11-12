@@ -35,10 +35,8 @@ import com.yandex.mobile.ads.banner.BannerAdEventListener
 import com.yandex.mobile.ads.banner.BannerAdSize
 import com.yandex.mobile.ads.common.AdError
 import com.yandex.mobile.ads.common.AdRequest
-import com.yandex.mobile.ads.common.AdRequestConfiguration
 import com.yandex.mobile.ads.common.AdRequestError
 import com.yandex.mobile.ads.common.ImpressionData
-import com.yandex.mobile.ads.common.MobileAds
 import com.yandex.mobile.ads.interstitial.InterstitialAd
 import com.yandex.mobile.ads.interstitial.InterstitialAdEventListener
 import com.yandex.mobile.ads.interstitial.InterstitialAdLoadListener
@@ -88,8 +86,6 @@ class StartActivity : AppCompatActivity() {
         /**
          * YANDEX MOBILE ADVERTISEMENT
          */
-        MobileAds.setUserConsent(false)
-        val adRequestBuild = AdRequest.Builder().build()
         val adWidthPixels =
             if (binding.root.width == 0)
                 resources.displayMetrics.widthPixels
@@ -97,9 +93,7 @@ class StartActivity : AppCompatActivity() {
                 binding.root.width
         val adWidth = (adWidthPixels / resources.displayMetrics.density).roundToInt()
         binding.bannerAdView.apply {
-            setAdUnitId("R-M-1611210-2")
-//            setAdUnitId("R-M-DEMO-320x50")
-            setAdSize(BannerAdSize.stickySize(applicationContext, adWidth))
+            setAdSize(BannerAdSize.sticky(applicationContext, adWidth))
             setBannerAdEventListener(object : BannerAdEventListener {
                 override fun onAdLoaded() {
                     Log.e(bannerTAG, "BANNER LOADED")
@@ -109,7 +103,7 @@ class StartActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onAdFailedToLoad(p0: AdRequestError) {
+                override fun onAdFailedToLoad(error: AdRequestError) {
                     Log.e(bannerTAG, "BANNER LOAD FAILED")
                 }
 
@@ -117,33 +111,14 @@ class StartActivity : AppCompatActivity() {
                     Log.e(bannerTAG, "BANNER CLICKED")
                 }
 
-                override fun onLeftApplication() {
-                    Log.e(bannerTAG, "BANNER LEFT")
-                }
-
-                override fun onReturnedToApplication() {
-                    Log.e(bannerTAG, "BANNER RETURN")
-                }
-
-                override fun onImpression(p0: ImpressionData?) {
+                override fun onImpression(impressionData: ImpressionData?) {
                     Log.e(bannerTAG, "BANNER IMPRESSION")
                 }
             })
-            loadAd(adRequestBuild)
+            loadAd(AdRequest.Builder("R-M-1611210-2").build())
         }
 
-        interstitialAdLoader = InterstitialAdLoader(applicationContext).apply {
-            setAdLoadListener(object: InterstitialAdLoadListener {
-                override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                    Log.e(interstitialTAG, "Interstitial ad load success")
-                    this@StartActivity.interstitialAd = interstitialAd
-                }
-
-                override fun onAdFailedToLoad(p0: AdRequestError) {
-                    Log.e(interstitialTAG, "Interstitial ad load failed")
-                }
-            })
-        }
+        interstitialAdLoader = InterstitialAdLoader(applicationContext)
         loadInterstitialAd()
 
         vm.actionClickQuantity.observe(this) { quantity ->
@@ -156,7 +131,7 @@ class StartActivity : AppCompatActivity() {
                                 vm.refreshActionClickQuantity()
                             }
 
-                            override fun onAdFailedToShow(p0: AdError) {
+                            override fun onAdFailedToShow(adError: AdError) {
                                 Log.e(interstitialTAG, "Interstitial ad failed to show")
                             }
 
@@ -171,7 +146,7 @@ class StartActivity : AppCompatActivity() {
                                 Log.e(interstitialTAG, "Interstitial ad clicked")
                             }
 
-                            override fun onAdImpression(p0: ImpressionData?) {
+                            override fun onAdImpression(impressionData: ImpressionData?) {
                                 Log.e(interstitialTAG, "Interstitial ad impression")
                             }
                         })
@@ -319,8 +294,17 @@ class StartActivity : AppCompatActivity() {
     }
 
     private fun loadInterstitialAd() {
-        val adRequestConfiguration = AdRequestConfiguration.Builder("R-M-1611210-3").build()
-        interstitialAdLoader?.loadAd(adRequestConfiguration)
+        val adRequest = AdRequest.Builder("R-M-1611210-3").build()
+        interstitialAdLoader?.loadAd(adRequest, object : InterstitialAdLoadListener {
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                Log.e(interstitialTAG, "Interstitial ad load success")
+                this@StartActivity.interstitialAd = interstitialAd
+            }
+
+            override fun onAdFailedToLoad(error: AdRequestError) {
+                Log.e(interstitialTAG, "Interstitial ad load failed: ${error.description}")
+            }
+        })
     }
 
     private fun startVibration(vibrationEffect: Int, enabled: Boolean) {
