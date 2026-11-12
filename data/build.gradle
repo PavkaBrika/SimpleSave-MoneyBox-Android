@@ -6,7 +6,9 @@ plugins {
 
 android {
     namespace 'com.breckneck.mysecondprojectmoneybox.data'
-    compileSdk 36
+    compileSdk {
+        version = release(36)
+    }
 
     defaultConfig {
         minSdk 23
