@@ -12,7 +12,7 @@ MoneyBox is my very first personal project that I built entirely on my own. It m
 
 ## ⚠️ Maintenance status
 
-MoneyBox is no longer actively maintained or supported. The app remains available on Google Play, but new updates and support are not planned.
+MoneyBox receives occasional maintenance updates, with no fixed release schedule or guaranteed support. The app remains available on Google Play.
 
 ## ✨ What the app does
 
@@ -49,8 +49,9 @@ The project is split into three Gradle modules:
 ### Requirements
 
 - Android Studio
-- JDK 11 or newer
-- Android SDK 34
+- JDK 17 or newer
+- Android SDK Platform 36
+- Android Gradle Plugin 8.13.2 (configured in the project)
 
 Clone the repository and build the debug app:
 
